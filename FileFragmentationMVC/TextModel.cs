@@ -108,6 +108,22 @@ namespace TextFragmentationMVC
                 throw new Exception("Error during comparison: " + ex.Message);
             }
         }
+        //Check file content & character count
+        public (string content, int charCount) CheckFile(string filename)//tuple return type it can return content and charactercount at once
+        {
+            try
+            {
+                if (!File.Exists(filename))
+                    throw new FileNotFoundException("File not found: " + filename);
+
+                string content = File.ReadAllText(filename);
+                return (content, content.Length);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error reading file: " + ex.Message);
+            }
+        }
     }
 }
 
