@@ -89,6 +89,25 @@ namespace TextFragmentationMVC
                 throw new Exception("Error during defragmentation: " + ex.Message);
             }
         }
+        //Compare input and output
+        public bool CompareFiles()
+        {
+            try
+            {
+                if (!File.Exists(InputFile) || !File.Exists(OutputFile))
+                    throw new Exception("Input or Output file missing.");
+
+                string inputText = File.ReadAllText(InputFile);
+                string outputText = File.ReadAllText(OutputFile);
+
+                return string.Equals(inputText.Replace("\r\n", "\n").Trim(),
+                                     outputText.Replace("\r\n", "\n").Trim());//compares both
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error during comparison: " + ex.Message);
+            }
+        }
     }
 }
 
