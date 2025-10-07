@@ -1,2 +1,17 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
+
+namespace TextFragmentationMVC
+{
+    class Program
+    {
+        static void Main()
+        {
+            var model = new TextModel();
+            var view = new TextView();
+            var controller = new TextController(model, view);
+            controller.Run();
+            Console.WriteLine("\nPress any key to exit...");
+            Console.ReadKey();
+        }
+    }
+}
