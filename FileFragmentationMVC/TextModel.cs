@@ -35,6 +35,35 @@ namespace TextFragmentationMVC
                 throw new Exception("Error creating input file: " + ex.Message);
             }
         }
+        //Fragmentation method
+        public void Fragment(int wordsPerFile)
+        {
+            try
+            {
+                if (!File.Exists(InputFile))//checks if input.txt present
+                    throw new FileNotFoundException("Input file does not exist.");
+
+                var allText = File.ReadAllText(InputFile);
+                var words = allText.Split(new[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);//tells it to split by space,tab,newline and remove empty spaces
+
+                FragmentedFiles.Clear();//FragmentedFiles-list storing names of all created fragment files
+                int fileCount = (int)Math.Ceiling((double)words.Length / wordsPerFile);//by dividing total no of words in input file to wordsperfile we are getting no of words per fragmented file
+
+                int digits = fileCount.ToString().Length;//how many digits the filecount has .used to format filenames with leading 0
+
+                for (int i = 0; i < fileCount; i++)
+                {
+                    var fileWords = words.Skip(i * wordsPerFile).Take(wordsPerFile);//skips words that belong to earlier files,,,takes the next wordsPerFile words for this file.
+                    string filename = $"{(i + 1).ToString().PadLeft(digits, '0')}.txt";//file numbering from 1 and add 0 on left if needed
+                    File.WriteAllText(filename, string.Join(" ", fileWords));
+                    FragmentedFiles.Add(filename);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error during fragmentation: " + ex.Message);
+            }
+        }
     }
 }
 
