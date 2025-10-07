@@ -47,5 +47,19 @@ namespace TextFragmentationMVC
             Console.WriteLine(message);
             Console.ResetColor();
         }
+
+        public int AskWordsPerFile()
+        {
+            int n;
+            while (true)
+            {
+                Console.Write("Enter number of words per fragmented file: ");
+                if (int.TryParse(Console.ReadLine(), out n) && n > 0)//it reads what user types and convert that into integer ,
+                                                                     //if its valid number it stores it in n and returns true
+
+                    return n;
+                Console.WriteLine("Invalid input. Please enter a positive integer.");
+            }
+        }
     }
 }
