@@ -64,6 +64,31 @@ namespace TextFragmentationMVC
                 throw new Exception("Error during fragmentation: " + ex.Message);
             }
         }
+        //Defragmentation method
+        public void Defragment()
+        {
+            try
+            {
+                if (FragmentedFiles.Count == 0)
+                    throw new Exception("No fragmented files found.");
+
+                using (var writer = new StreamWriter(OutputFile))//allows to write text in output file
+                {
+                    foreach (var file in FragmentedFiles)
+                    {
+                        if (!File.Exists(file))
+                            throw new FileNotFoundException($"Fragment file {file} not found.");
+
+                        string content = File.ReadAllText(file);
+                        writer.Write(content + " ");//writes the fragment text into output.txt file
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error during defragmentation: " + ex.Message);
+            }
+        }
     }
 }
 
