@@ -61,5 +61,17 @@ namespace TextFragmentationMVC
                 Console.WriteLine("Invalid input. Please enter a positive integer.");
             }
         }
+        public void ShowFiles(List<string> files)
+        {
+            Console.WriteLine("Fragmented files created:");
+            foreach (var file in files)
+                Console.WriteLine(file);
+        }
+
+        public string AskFileName()
+        {
+            Console.Write("Enter file name to check: ");
+            return Console.ReadLine()?.Trim();
+        }
     }
 }
