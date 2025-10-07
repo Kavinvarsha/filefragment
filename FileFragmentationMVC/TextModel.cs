@@ -23,18 +23,7 @@ namespace TextFragmentationMVC
                 throw new Exception("Error creating input file: " + ex.Message);
             }
         }
-        //Overloaded CreateInputFile to preserve multiple lines
-        public void CreateInputFile(string[] lines)
-        {
-            try
-            {
-                File.WriteAllLines(InputFile, lines); // writes each element as a new line
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error creating input file: " + ex.Message);
-            }
-        }
+        
         //Fragmentation method
         public void Fragment(int wordsPerFile)
         {

@@ -37,20 +37,21 @@ namespace TextFragmentationMVC
                         _view.ShowMessage("Empty input.txt created successfully.");
 
                         // Enter text to store in input.txt(line by line)
-                        string[] inputLines = _view.GetInputTextLines();//Get array of lines from user
-
-                        if (inputLines.Length > 0)
+                        // Step 1: Enter text to store in input.txt
+                        string inputText = _view.GetInputText();
+                        if (!string.IsNullOrWhiteSpace(inputText))
                         {
-                            _model.CreateInputFile(inputLines);//Write each line separately
+                            _model.CreateInputFile(inputText);
                             _view.ShowMessage("Text stored in input.txt successfully.");
                         }
-
                     }
+
                     else
                     {
                         _view.ShowMessage("Exiting program because input.txt was not created.");
                         return;//Exit program
                     }
+
 
                     // Fragmentation
                     int wordsPerFile = _view.AskWordsPerFile();
